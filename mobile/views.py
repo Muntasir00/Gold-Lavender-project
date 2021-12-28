@@ -21,3 +21,4 @@ def add_mobile(request):
         form = MobileForm()
 
     return render(request, 'add_mobile.html', {'form':form})
+
