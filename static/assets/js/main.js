@@ -1,4 +1,5 @@
-
+const url = window.location.href
+console.log(url)
 
 jQuery(function($) {
     $(".sidebar-dropdown > a").click(function() {

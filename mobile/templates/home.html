@@ -1,25 +1,27 @@
- {% load static %}
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <!-- Required meta tags -->
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet" />
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet"/>
     <!-- Font-Awesome CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
 
     <!-- Google Font Family CSS -->
-    <link rel="preconnect" href="https://fonts.gstatic.com" />
-    <link href="https://fonts.googleapis.com/css2?family=Abel&display=swap" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.gstatic.com"/>
+    <link href="https://fonts.googleapis.com/css2?family=Abel&display=swap" rel="stylesheet"/>
 
     <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous" />
-{#    <link href="{% static 'css/base.css' %}" rel="stylesheet">#}
-    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/cart.css' %}" > 
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous"/>
+    {#    <link href="{% static 'css/base.css' %}" rel="stylesheet">#}
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/cart.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'assets/css/style.css' %}">
     <title>{% block title %} Home {% endblock %}</title>
-    
+
     <style>
 
     </style>
@@ -28,189 +30,272 @@
 <body>
 
 
+<div class="container-fulid topbar">
+    <p class="mb-0">Mobile Shopping </p>
+</div>
+
+<nav id="navbar_top" class="navbar navbar-expand-lg navbar-light bg-light topnavbar">
+    <div class="container">
+        <a class="navbar-brand" href="{% url 'home' %}" id="BrandName">Gold Lavender Project</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse order-1" id="navbarSupportedContent">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
 
 
+            </ul>
+            {#                        <div >#}
+            {#                            <form class="d-flex" autocomplete="off" id="search-form">#}
+            {#                                {% csrf_token %}#}
+            {#                                <input  type="text" id="search-input" placeholder="Search" >#}
+            {#                                <input class="form-control me-2" type="search" id="search-input" placeholder="Search" aria-label="Search">#}
+            {#                                <button class="btn btn-success" type="submit">Search</button>#}
+            {#                            </form>#}
+            {#                            <div id="results-box" class="result-card not-visible"></div>#}
+            {#                        </div>#}
+        </div>
+    </div>
+</nav>
 
-    <div class="container-fulid topbar">
-        <p class="mb-0">Mobile Shopping </p>
+
+<div class="container my-5 pb-5">
+
+    <div class=" w-100 text-center mb-5">
+        <form autocomplete="off" id="search-form">
+            {% csrf_token %}
+            <input type="text" style="margin: 0 auto" class="w-50 form-control" id="search-input" placeholder="Search">
+        </form>
+        <div id="results-box" class="result-card not-visible mt-3">
+
+        </div>
     </div>
 
-    <nav id="navbar_top" class="navbar navbar-expand-lg navbar-light bg-light topnavbar">
-        <div class="container">
-            <a class="navbar-brand" href="{% url 'home' %}" id="BrandName">Gold Lavender Project</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse order-1" id="navbarSupportedContent">
-                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                    
+
+    <div class="row">
+        <div class="col-12">
+            <div class="table-responsive-lg">
+                <table class="table table-striped">
+                    <thead class="table-header">
+                    <tr>
+                        <th scope="col">SI</th>
+                        <th scope="col">Image</th>
+                        <th scope="col">Brand Name</th>
+                        <th scope="col">Model Name</th>
+                        <th scope="col">Color</th>
+                        <th scope="col">Jan Code</th>
+
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for mobile in mobiles %}
+                        <tr>
+                            <td> {{ mobile.id }} </td>
+                            <td>
+
+                                <img class="cart-image" src="{{ mobile.image.url }}">
+
+                            </td>
+
+                            <td>{{ mobile.brand_name }}</td>
+                            <td>{{ mobile.model_name }}</td>
+                            <td>{{ mobile.color }}</td>
 
 
- 
+                            <td class="num">{{ mobile.jan_code }}</td>
 
 
-    
-                </ul>
-                <form class="d-flex">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-success" type="submit">Search</button>
-                </form>
+                        </tr>
+                    {% endfor %}
+
+
+                    </tbody>
+
+                </table>
+
+                <a href="{% url 'add_mobile' %}" class="btn btn-sm btn-block btn-success text-uppercase"> ADD MOBILE</a>
+
             </div>
+
         </div>
-    </nav>
 
 
-    <div class="container my-5 pb-5">
+    </div>
+
+</div>
+
+
+<section class="footer pt-5">
+    <div class="container py-4">
         <div class="row">
-            <div class="col-12">
-                <div class="table-responsive-lg">
-                    <table class="table table-striped">
-                        <thead class="table-header">
-                            <tr>
-                                <th scope="col">SI</th>
-                                <th scope="col">Image</th>
-                                <th scope="col">Brand Name</th>
-                                <th scope="col">Model Name</th>
-                                <th scope="col">Color</th>
-                                <th scope="col">Jan Code</th>
-                                
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {% for mobile in mobiles %}
-                            <tr>
-                                <td> {{ mobile.id }} </td>
-                                <td>
-                                    
-                                        <img class="cart-image" src="{{ mobile.image.url}}">
-                                    
-                                </td>
-
-                                <td>{{ mobile.brand_name }}</td>
-                                <td>{{ mobile.model_name }}</td>
-                                <td>{{ mobile.color }}</td>
-                                
-
-                                <td class="num">{{ mobile.jan_code }}</td>
-
-                              
-
-                            </tr>
-                            {% endfor %}
-
-                            
-
-                            
-                        </tbody>
-
-                    </table>
-
- <a href="{% url 'add_mobile' %}" class="btn btn-sm btn-block btn-success text-uppercase"> ADD MOBILE</a>
-
-                </div>
-
+            <div class="col-lg-4 col-md-4 col-sm-4 mb-4">
+                <h6 class="text-uppercase">customer care</h6>
+                <div class="is-divider small" style="
+                        background-color: rgba(255, 255, 255, 0.3) !important;
+                    "></div>
+                <p class="text-uppercase">faq</p>
+                <hr style="border-color: rgba(255, 255, 255, 0.08)"/>
+                <p>Return Policy</p>
+                <hr style="border-color: rgba(255, 255, 255, 0.08)"/>
+                <p>Shipping Policy</p>
             </div>
-
-    
-
+            <div class="col-lg-4 col-md-4 col-sm-4 mb-4">
+                <h6 class="text-uppercase">company info</h6>
+                <div class="is-divider small" style="
+                        background-color: rgba(255, 255, 255, 0.3) !important;
+                    "></div>
+                <p>About Us</p>
+                <hr style="border-color: rgba(255, 255, 255, 0.08)"/>
+                <p>Privacy Policy</p>
+                <hr style="border-color: rgba(255, 255, 255, 0.08)"/>
+                <p>Terms of Use</p>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-4">
+                <h6 class="text-uppercase">keep in touch</h6>
+                <div class="is-divider small" style="
+                        background-color: rgba(255, 255, 255, 0.3) !important;
+                    "></div>
+                <p>support@muntasir690000@gmail.com</p>
+                <hr style="border-color: rgba(255, 255, 255, 0.08)"/>
+                <p>Contact Us</p>
+            </div>
         </div>
-
     </div>
+</section>
 
-
-
-
-
-    <section class="footer pt-5">
-        <div class="container py-4">
-            <div class="row">
-                <div class="col-lg-4 col-md-4 col-sm-4 mb-4">
-                    <h6 class="text-uppercase">customer care</h6>
-                    <div class="is-divider small" style="
-                        background-color: rgba(255, 255, 255, 0.3) !important;
-                    "></div>
-                    <p class="text-uppercase">faq</p>
-                    <hr style="border-color: rgba(255, 255, 255, 0.08)" />
-                    <p>Return Policy</p>
-                    <hr style="border-color: rgba(255, 255, 255, 0.08)" />
-                    <p>Shipping Policy</p>
-                </div>
-                <div class="col-lg-4 col-md-4 col-sm-4 mb-4">
-                    <h6 class="text-uppercase">company info</h6>
-                    <div class="is-divider small" style="
-                        background-color: rgba(255, 255, 255, 0.3) !important;
-                    "></div>
-                    <p>About Us</p>
-                    <hr style="border-color: rgba(255, 255, 255, 0.08)" />
-                    <p>Privacy Policy</p>
-                    <hr style="border-color: rgba(255, 255, 255, 0.08)" />
-                    <p>Terms of Use</p>
-                </div>
-                <div class="col-lg-4 col-md-4 col-sm-4">
-                    <h6 class="text-uppercase">keep in touch</h6>
-                    <div class="is-divider small" style="
-                        background-color: rgba(255, 255, 255, 0.3) !important;
-                    "></div>
-                    <p>support@muntasir690000@gmail.com</p>
-                    <hr style="border-color: rgba(255, 255, 255, 0.08)" />
-                    <p>Contact Us</p>
-                </div>
+<footer style="background-color: #000000">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 mt-3 mb-4">
+                <p style="color: #fff">
+                    Copyright 2021 © muntasir690000@gmail.com
+                </p>
+            </div>
+            <div class="col-md-6 mt-3 mb-6">
+                <i class="fa fa-3x fa-cc-visa" aria-hidden="true"></i>
+                <i class="fa fa-3x fa-cc-paypal" aria-hidden="true"></i>
+                <i class="fa fa-3x fa-cc-mastercard" aria-hidden="true"></i>
             </div>
         </div>
-    </section>
+    </div>
+</footer>
 
-    <footer style="background-color: #000000">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-6 mt-3 mb-4">
-                    <p style="color: #fff">
-                        Copyright 2021 © muntasir690000@gmail.com
-                    </p>
-                </div>
-                <div class="col-md-6 mt-3 mb-6">
-                    <i class="fa fa-3x fa-cc-visa" aria-hidden="true"></i>
-                    <i class="fa fa-3x fa-cc-paypal" aria-hidden="true"></i>
-                    <i class="fa fa-3x fa-cc-mastercard" aria-hidden="true"></i>
-                </div>
-            </div>
-        </div>
-    </footer>
+<button onclick="topFunction()" id="myBtn" title="Go to top">
+    <i class="fa fa-chevron-up" aria-hidden="true"></i>
+</button>
 
-    <button onclick="topFunction()" id="myBtn" title="Go to top">
-        <i class="fa fa-chevron-up" aria-hidden="true"></i>
-    </button>
-
-    <!--footer part end-->
+<!--footer part end-->
 
 
-    <!-- Option 1: Bootstrap Bundle with Popper -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
-    <script src="{% static 'assets/js/jquery-3.5.1.min.js' %}"></script>
-    <script src="{% static 'assets/js/main.js' %}"></script>
+<!-- Option 1: Bootstrap Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0"
+        crossorigin="anonymous"></script>
+<script src="{% static 'assets/js/jquery-3.5.1.min.js' %}"></script>
+<script src="{% static 'assets/js/main.js' %}"></script>
 
-    <script>
-        $(window).on('load', function() { // makes sure the whole site is loaded
-            $('#status').fadeOut(); // will first fade out the loading animation
-            $('#preloader').delay(350).fadeOut('slow'); // will fade out the white DIV that covers the website.
-            $('body').delay(350).css({
-                'overflow': 'visible'
-            });
-        })
+<script>
 
-        if ($(window).width() > 992) {
-            $(window).scroll(function() {
-                if ($(this).scrollTop() > 40) {
-                    $('#navbar_top').addClass("fixed-top");
-                    // add padding top to show content behind navbar
-                    $('body').css('padding-top', $('.navbar').outerHeight() + 'px');
+    const url = window.location.href
+    const searchForm = document.getElementById('search-form');
+    const searchInput = document.getElementById('search-input')
+    const resultBox = document.getElementById('results-box')
+    {#alert(JSON.stringify(resultBox))#}
+
+    {#console.log(searchForm, searchInput)#}
+
+    const csrf = document.getElementsByName('csrfmiddlewaretoken')[0].value
+    console.log(csrf)
+
+    const sendSearchData = (mobile) => {
+        $.ajax({
+            type: 'POST',
+            url: 'search/',
+            data: {
+                'csrfmiddlewaretoken': csrf,
+                "mobile": mobile
+            },
+            success: (res) => {
+                console.log(res.data)
+                const data = res.data
+                if (Array.isArray(data)) {
+                    resultsBox.innerHTML = ""
+                    data.forEach(mobile => {
+                        resultsBox.innerHTML += `
+                            <a href="" class="item">
+                                <div class="row mt-2 mb-2">
+                                    <div class="col-2">
+                                        <img src="${mobile.image}" class="game-img" />
+                                    </div>
+                                    <div class="col-4">
+                                        <h5>${mobile.model_name}</h5>
+                                        <p class="text-muted">${mobile.model_name}</p>
+                                    </div>
+                                    <div class="col-4">
+                                        <h5>${mobile.color}</h5>
+                                        <p class="text-muted">${mobile.color}</p>
+                                    </div>
+                                    <div class="col-2">
+                                        <h5>${mobile.jan_code}</h5>
+                                        <p class="text-muted">${mobile.jan_code}</p>
+                                    </div>
+                                </div>
+                            </a>
+                        `
+                    })
                 } else {
-                    $('#navbar_top').removeClass("fixed-top");
-                    // remove padding top from body
-                    $('body').css('padding-top', '0');
+                    if (searchInput.value.length > 0) {
+                        resultBox.innerHTML = `<b>${data}</b>`
+                    } else {
+                        resultBox.classList.add('not-visible')
+                    }
                 }
-            });
-        } // end if
-    </script>
+            },
+            error: (err) => {
+                console.log(err)
+            }
+        })
+    }
+
+    console.log(resultBox.classList.contains('not-visible'))
+
+    searchInput.addEventListener('keyup', e => {
+        console.log(e.target.value)
+
+        if (resultBox.classList.contains('not-visible')) {
+            resultBox.classList.remove('not-visible')
+        }
+        if (e.target.value === ''){
+            resultBox.classList.add('not-visible')
+        }
+
+        sendSearchData(e.target.value)
+    })
+
+
+    $(window).on('load', function () { // makes sure the whole site is loaded
+        $('#status').fadeOut(); // will first fade out the loading animation
+        $('#preloader').delay(350).fadeOut('slow'); // will fade out the white DIV that covers the website.
+        $('body').delay(350).css({
+            'overflow': 'visible'
+        });
+    })
+
+    if ($(window).width() > 992) {
+        $(window).scroll(function () {
+            if ($(this).scrollTop() > 40) {
+                $('#navbar_top').addClass("fixed-top");
+                // add padding top to show content behind navbar
+                $('body').css('padding-top', $('.navbar').outerHeight() + 'px');
+            } else {
+                $('#navbar_top').removeClass("fixed-top");
+                // remove padding top from body
+                $('body').css('padding-top', '0');
+            }
+        });
+    } // end if
+</script>
 </body>
 
 </html>
